@@ -37,10 +37,9 @@ exports.createProduct = (req, res) => {
     product
       .save()
       .then(() => {
-        res.render("home", {msg: "Product saved successfully!"})
-        // res.status(200).json({
-        //   message: "Product saves successfully!"
-        // });
+        res.status(200).json({
+          message: "Product saves successfully!"
+        });
       })
       .catch(err => {
         res.status(400).json({
@@ -54,8 +53,7 @@ exports.getAllProduct = (req, res, next) => {
   Product.find()
   .select("id title price description imageUrl")
     .then(products => {
-      res.render("gallery", {products})
-      //res.status(200).json(products);
+      res.status(200).json(products);
     })
     .catch(err => {
       res.status(400).json({
@@ -69,8 +67,7 @@ exports.getOneProduct = (req, res, next) => {
     _id: req.params.id
   })
     .then(product => {
-      res.render("details", {product})
-      //res.status(200).json(product);
+      res.status(200).json(product);
     })
     .catch(error => {
       res.status(400).json({
@@ -82,8 +79,7 @@ exports.getOneProduct = (req, res, next) => {
 exports.editForm = (req, res) => {
     Product.findOne({_id: req.params.id})
     .then(product => {
-      res.render("update", {product})
-      // res.status(200).json(products)
+      res.status(200).json(product)
     })
     .catch(err => {
       res.status(500).json({
@@ -115,10 +111,9 @@ exports.modifyProduct = (req, res) => {
   }  
   Product.updateOne({ _id: req.params.id }, product)
     .then(() => {
-      res.render("gallery", {msg: "Product updated successfully"})
-      // res.status(200).json({
-      //   message: "Product Updated Successfully!"
-      // });
+      res.status(200).json({
+        message: "Product Updated Successfully!"
+      });
     })
     .catch(error => {
       res.status(404).json({
@@ -133,11 +128,9 @@ exports.deleteProduct = (req, res, next) => {
     fs.unlink("images/" + filename, () => {
       Product.deleteOne({ _id: req.params.id })
         .then(() => {
-          req.flash("success_msg", "Product deleted successfully")
-          res.redirect("/api/product");
-          // res.status(200).json({
-          //   message: "Deleted Successfully!"
-          // });
+          res.status(200).json({
+            message: "Deleted Successfully!"
+          });
         })
         .catch(error => {
           res.status(404).json({

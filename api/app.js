@@ -1,9 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const expressLayouts = require('express-ejs-layouts')
-const session = require("express-session");
+const cors = require("cors");
 const path = require("path");
-const flash = require("connect-flash");
 
 const stuffRoutes = require("./routes/product");
 const userRoutes = require("./routes/user");
@@ -15,42 +13,44 @@ const app = express();
 
 dbConnect();
 
-// EJS
-app.use(expressLayouts)
-app.set('view engine', 'ejs');
-
 // Bode Parser
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
+//To Override CORS Denial Errors
+app.use(cors());
 
 // Static Files
 app.use("/images", express.static(path.join(__dirname, "images")));
 app.use(express.static('./public'));
 
-//Express Session
-app.use(
-    session({
-      secret: "secret",
-      resave: true,
-      saveUninitialized: true,
-    })
-  );
-
-//Connect Flash
-app.use(flash());
-
-// Global variables
-app.use(function (req, res, next) {
-    res.locals.success_msg = req.flash("success_msg");
-    res.locals.error_msg = req.flash("error_msg");
-    res.locals.error = req.flash("error");
-    next();
-  });
 
 //Routes
 app.use('/', indexRoutes)
 app.use("/api/product", stuffRoutes);
 app.use("/api/auth", userRoutes);
+
+//Error Handling
+app.use((req, res, next) => {
+  const error = new Error("Not Found!");
+  error.status = 404;
+  next(error);
+});
+
+app.use((error, req, res, next) => {
+  res.status(error.status || 500);
+  res.json({
+    error: {
+      message: error.message,
+    },
+  });
+});
+
+app.use((req, res, next) => {
+  res.status(200).json({
+    message: "Server set-up successfully!",
+  });
+});
+
 
 module.exports = app;

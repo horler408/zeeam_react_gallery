@@ -3,20 +3,18 @@ const jwt = require("jsonwebtoken");
 
 const User = require("../models/user");
 
-exports.signup = (req, res) => res.render("register");
-exports.signin = (req, res) => res.render("login");
 
 exports.register = (req, res, next) => {
   const {name, email, phone, role, password, password2} = req.body
   let errors = [];
 
-  if(!name || !email || !phone || !password || password2) {
+  if(!name || !email || !phone || !password || !password2) {
     errors.push("Please all the fields")
   }
   if(password.length < 6) {
     errors.push("Password must be atleast 6 characters long")
   }
-  if(password2 != password2) {
+  if(password !== password2) {
     errors.push("Passwords must match")
   }
 
@@ -32,7 +30,7 @@ exports.register = (req, res, next) => {
   bcrypt.hash(password, 10).then((hash) => {
     const user = new User({
       name,
-      email,
+      email: email.toLowerCase(),
       phone,
       role,
       password: hash,
@@ -40,7 +38,6 @@ exports.register = (req, res, next) => {
     user
       .save()
       .then(() => {
-        // res.render("login", {msg: "Your registration was successful, You can now log in"})
         res.status(201).json({
           message: "User added successfully",
         });
@@ -70,14 +67,12 @@ exports.login = (req, res, next) => {
             });
           }else {
             const token = jwt.sign({ userId: user._id }, "RANDOM_TOKEN_SECRET", {
-              expiresIn: "12h",
+              expiresIn: "2h",
             });
-            req.flash("success_msg", "Logged in successfully")
-            res.redirect("/api/product")
-            // res.status(200).json({
-            //   userId: user._id,
-            //   token: token
-            // });
+            res.status(200).json({
+              userId: user._id,
+              token: token
+            });
           }
         })
         .catch((error) => {
