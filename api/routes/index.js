@@ -5,8 +5,7 @@ const auth = require("./../middleware/auth");
 const indexController = require('./../controllers/index')
 
 router.get('/', indexController.index);
-router.get("/home", indexController.home);
-router.get("/gallery", indexController.gallery);
-router.get("/dashboard", auth, indexController.dashboard)
+router.patch("/api/roles", indexController.roles);
+
 
 module.exports = router;

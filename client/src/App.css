@@ -133,7 +133,7 @@ form .avatar img {
 
 /* Index */
 .index_container {
-  background: url("/assets/photo_shop.png") center/cover no-repeat;
+  background: url("./assets/photo_shop.png") center/cover no-repeat;
   /* background: #252839; */
 }
 .main {
@@ -452,7 +452,7 @@ hr {
   position: relative;
 }
 .footer__top {
-  background: url("../assets/bg-boost-desktop.svg") center/cover no-repeat;
+  background: url("./assets/bg-boost-desktop.svg") center/cover no-repeat;
   background-color: hsl(257, 27%, 26%);
   min-height: 20vh;
   color: #fff;
