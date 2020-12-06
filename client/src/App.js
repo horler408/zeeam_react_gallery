@@ -7,9 +7,9 @@ import {
 import './App.css';
 import { AuthProvider } from './context/AuthContext';
 import { FetchProvider } from './context/FetchContext';
-import NavBar from "./components/NavBar";
-import Footer from "./components/Footer";
-//import AppWrapper from './AppWrapper';
+//import NavBar from "./components/NavBar";
+//import Footer from "./components/Footer";
+import AppWrapper from './AppWrapper';
 import Dashboard from './pages/Dashboard';
 import FourOFour from './pages/FourOFour';
 import Home from './pages/Home';
@@ -30,9 +30,9 @@ const AppRoutes = () => {
         <Signup />
       </Route>
       <Route exact path="/">
-        <NavBar />
+        <AppWrapper>
           <Home />
-        <Footer />
+        </AppWrapper>
       </Route>
       <Route exact path="/gallery">
         <Gallery />
