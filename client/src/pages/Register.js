@@ -35,14 +35,14 @@ export default function Register() {
     const submitCredentials = async credentials => {
         try {
         setLoginLoading(true);
-        const { data } = await publicFetch.post('signup', credentials)
+        const { data } = await publicFetch.post('auth/register', credentials)
         authContext.setAuthState(data)
         setSignupSuccess(data.message)
         setSignupError('')
         // redirect
         setTimeout(() => {
             setRedirectOnSignup(true)
-        }, 700)
+        }, 1000)
         console.log(data)
         } catch (error) {
         setLoginLoading(false);
@@ -56,10 +56,10 @@ export default function Register() {
             {redirectOnSignup && <Redirect to='/dashboard' />}
             <section>
                 <h2>Register Page</h2>
-                <div className="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-                    <div className="max-w-md w-full">
+                <div className="register_container">
+                    <div className="register_card">
                     <div>
-                        <div className="w-32 m-auto mb-6">
+                        <div className="avatar">
                         <img src={logo} alt="Logo" />
                         </div>
                         <h2 className="mb-2 text-center text-3xl leading-9 font-extrabold text-gray-900">
@@ -84,7 +84,7 @@ export default function Register() {
                         validationSchema={SignupSchema}
                     >
                         {() => (
-                        <Form className="mt-8">
+                        <Form className="form">
                             {signupSuccess && (
                             <FormSuccess text={signupSuccess} />
                             )}
@@ -97,10 +97,10 @@ export default function Register() {
                             value="true"
                             />
                             <div>
-                            <div className="flex">
-                                <div className="mb-2 mr-2 w-1/2">
-                                <div className="mb-1">
-                                    <Label text="First Name" />
+                            <div className="">
+                                <div className="">
+                                <div className="">
+                                    <Label text="" />
                                 </div>
                                 <FormInput
                                     ariaLabel="First Name"
@@ -109,7 +109,7 @@ export default function Register() {
                                     placeholder="First Name"
                                 />
                                 </div>
-                                <div className="mb-2 ml-2 w-1/2">
+                                <div style="mb-2 ml-2 w-1/2">
                                 <div className="mb-1">
                                     <Label text="Last Name" />
                                 </div>
