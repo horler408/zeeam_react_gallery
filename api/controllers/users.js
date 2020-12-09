@@ -53,7 +53,7 @@ exports.login = async (req, res) => {
         .status(400)
         .json({ message: 'Something went wrong.' });
     }
-  };
+};
   
 exports.register = async (req, res) => {
     try {
@@ -122,7 +122,7 @@ exports.register = async (req, res) => {
         message: 'There was a problem creating your account second'
       });
     }
-  }
+}
 
 exports.users = async (req, res) => {
     try {
@@ -138,5 +138,5 @@ exports.users = async (req, res) => {
         message: 'There was a problem getting the users'
       });
     }
-  }
+}
 

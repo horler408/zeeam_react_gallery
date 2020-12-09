@@ -1,14 +1,13 @@
 import React from 'react';
 import {
   BrowserRouter as Router,
+  Redirect,
   Route,
   Switch
 } from 'react-router-dom';
 import './App.css';
 import { AuthProvider } from './context/AuthContext';
 import { FetchProvider } from './context/FetchContext';
-//import NavBar from "./components/NavBar";
-//import Footer from "./components/Footer";
 import AppWrapper from './AppWrapper';
 import Dashboard from './pages/Dashboard';
 import FourOFour from './pages/FourOFour';
@@ -18,9 +17,25 @@ import Details from './pages/Details';
 import Login from './pages/Login';
 import Signup from './pages/Register';
 import Users from './pages/Users';
+import AuthContext from './context/AuthContext';
 
+const AuthenticatedRoute = ({ children, ...rest }) => {
+  const authContext = useContext(AuthContext);
+  return (
+    <Route {...rest} render={() =>
+      authContext.isAuthenticated() ? (
+        <AppWrapper>
+          {children}
+        </AppWrapper>
+      ) : (
+        <Redirect to="/" />
+      )
+    } />
+  )
+}
 
 const AppRoutes = () => {
+
   return (
     <Switch>
       <Route path="/login">
@@ -34,14 +49,21 @@ const AppRoutes = () => {
           <Home />
         </AppWrapper>
       </Route>
-      <Route exact path="/gallery">
+      <AuthenticatedRoute exact path="/gallery">
         <Gallery />
-      </Route>
+      </AuthenticatedRoute>
       <Route exact path="/gallery/:id">
         <Details />
       </Route>
-      <Route path="/dashboard">
-        <Dashboard />
+      <Route path="/dashboard" render={() =>
+        authContext.isAuthenticated() ? (
+          <AppWrapper>
+            <Dashboard />
+          </AppWrapper>
+        ) : (
+          <Redirect to="/" />
+        )
+      }>
       </Route>
       <Route path="/users">
         <Users />
