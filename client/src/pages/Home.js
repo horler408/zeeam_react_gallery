@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import GradientLink from '../components/common/GradientLink';
-import GradientBar from './../components/common/GradientBar';
+import GradientBar from './../components/GradientBar';
 //import logo from './../images/logo.png';
 import { AuthContext } from './../context/AuthContext';
 
 export default function Home() {
     const authContext = useContext(AuthContext);
     return (
-        <div>
-            <h2>Home Page</h2>
+        <div className="index_container">
+            <div class="main">
+                <h2 data-text="ZeeamFashionWorld">ZeeamFashionWorld</h2>
+            </div>
         </div>
     )
 }

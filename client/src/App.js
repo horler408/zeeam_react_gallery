@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   BrowserRouter as Router,
   Redirect,
@@ -15,9 +15,9 @@ import Home from './pages/Home';
 import Gallery from './pages/Gallery';
 import Details from './pages/Details';
 import Login from './pages/Login';
-import Signup from './pages/Register';
+import Register from './pages/Register';
 import Users from './pages/Users';
-import AuthContext from './context/AuthContext';
+import { AuthContext } from './context/AuthContext';
 
 const AuthenticatedRoute = ({ children, ...rest }) => {
   const authContext = useContext(AuthContext);
@@ -42,7 +42,7 @@ const AppRoutes = () => {
         <Login />
       </Route>
       <Route path="/register">
-        <Signup />
+        <Register />
       </Route>
       <Route exact path="/">
         <AppWrapper>
@@ -55,16 +55,9 @@ const AppRoutes = () => {
       <Route exact path="/gallery/:id">
         <Details />
       </Route>
-      <Route path="/dashboard" render={() =>
-        authContext.isAuthenticated() ? (
-          <AppWrapper>
-            <Dashboard />
-          </AppWrapper>
-        ) : (
-          <Redirect to="/" />
-        )
-      }>
-      </Route>
+      <AuthenticatedRoute exact path="/gallery">
+        <Dashboard />
+      </AuthenticatedRoute>
       <Route path="/users">
         <Users />
       </Route>

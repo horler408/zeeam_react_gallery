@@ -4,6 +4,10 @@ import { AuthContext } from '../context/AuthContext';
 export default function Dashboard() {
     const authContext = useContext(AuthContext);
     const {auth} = authContext
+
+    const handleClick = () => {
+        
+    }
     return (
         <div>
             <h2>Dashboard Page</h2>

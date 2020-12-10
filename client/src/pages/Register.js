@@ -55,17 +55,16 @@ export default function Register() {
         <div>
             {redirectOnSignup && <Redirect to='/dashboard' />}
             <section>
-                <h2>Register Page</h2>
                 <div className="register_container">
                     <div className="register_card">
                     <div>
                         <div className="avatar">
                         <img src={logo} alt="Logo" />
                         </div>
-                        <h2 className="mb-2 text-center text-3xl leading-9 font-extrabold text-gray-900">
+                        <h2 className="form_info">
                         Sign up for an account
                         </h2>
-                        <p className="text-gray-600 text-center">
+                        <p className="form_info">
                         Already have an account?{' '}
                         <Hyperlink to="login" text="Log in now" />
                         </p>
@@ -97,57 +96,61 @@ export default function Register() {
                             value="true"
                             />
                             <div>
-                            <div className="">
-                                <div className="">
-                                <div className="">
-                                    <Label text="" />
+                            <div className="names form_div">
+                                <div>
+                                <div className="label">
+                                    <Label text="First Name" />
                                 </div>
                                 <FormInput
-                                    ariaLabel="First Name"
+                                    style="form_input"
                                     name="firstName"
                                     type="text"
                                     placeholder="First Name"
                                 />
                                 </div>
-                                <div style="mb-2 ml-2 w-1/2">
-                                <div className="mb-1">
+
+                                <div>
+                                <div className="label">
                                     <Label text="Last Name" />
                                 </div>
                                 <FormInput
-                                    ariaLabel="Last Name"
+                                    style="form_input"
                                     name="lastName"
                                     type="text"
                                     placeholder="Last Name"
                                 />
                                 </div>
                             </div>
-                            <div className="mb-2">
-                                <div className="mb-1">
-                                <Label text="Email address" />
+
+                            <div className="form_div">
+                                <div className="label">
+                                    <Label text="Email Address" />
                                 </div>
                                 <FormInput
-                                ariaLabel="Email address"
+                                style="form_input"
                                 name="email"
                                 type="email"
-                                placeholder="Email address"
+                                placeholder="Email Address"
                                 />
                             </div>
-                            <div className="mb-2">
-                                <div className="mb-1">
-                                <Label text="Phone Number" />
+                            <div className="form_div">
+                                <div className="label">
+                                    <Label text="Phone Number" />
                                 </div>
                                 <FormInput
-                                ariaLabel="Phone Number"
+                                style="form_input"
                                 name="phone"
                                 type="text"
                                 placeholder="Phone Number"
                                 />
                             </div>
-                            <div>
-                                <div className="mb-1">
-                                <Label text="Password" />
+
+                            <div className="form_div">
+                                <div className="label">
+                                    <Label text="Password" />
                                 </div>
                                 <FormInput
+                                style="form_input"
                                 ariaLabel="Password"
                                 name="password"
                                 type="password"
@@ -156,8 +159,9 @@ export default function Register() {
                             </div>
                             </div>
 
-                            <div className="mt-6">
+                            <div>
                             <GradientButton
+                                style="reg-btn"
                                 type="submit"
                                 text="Sign Up"
                                 loading={loginLoading}

@@ -25,10 +25,10 @@ app.use(cors());
 app.use("/images", express.static(path.join(__dirname, "images")));
 app.use(express.static('./public'));
 
-app.use((req, res, next) => {
-  console.log(req.headers);
-  next();
-})
+// app.use((req, res, next) => {
+//   console.log(req.headers);
+//   next();
+// })
 
 //Routes
 app.use('/', indexRoutes)

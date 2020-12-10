@@ -5,9 +5,9 @@ import Input from './Input';
 
 
 const FormInput = ({
-  ariaLabel,
   name,
   type,
+  style,
   placeholder
 }) => {
   const [field, meta] = useField(name);
@@ -15,9 +15,9 @@ const FormInput = ({
     <>
       <Input
         field={field}
-        ariaLabel={ariaLabel}
         name={field.name}
         type={type}
+        className={style}
         placeholder={placeholder}
       />
       {meta.touched && meta.error ? (
