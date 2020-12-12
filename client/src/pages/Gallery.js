@@ -1,5 +1,6 @@
 import Axios from 'axios'
 import React, { useState, useEffect, useContext } from 'react';
+import { Link } from 'react-router-dom';
 //import { FetchContext } from './../context/FetchContext';
 import publicFetch from './../util/fetch';
 
@@ -23,7 +24,7 @@ export default function Gallery() {
         };
     
         getProducts();
-      }, [fetchContext]);*/
+      }, [baseUrl]);*/
 
     useEffect(() => {
         const getResource = async () => {
@@ -55,7 +56,7 @@ export default function Gallery() {
                         <img src={product.imageUrl} alt={product.title} />
                         <div className="title">{product.title.toUpperCase()}</div>
                         <div className="price">{product.price}</div>
-                        <p className="item_order"><a href="/api/product/">{product.description}</a></p>
+                        <p className="item_order"><Link to={`/gallery/${product._id}`}>{product.description}</Link></p>
                     </div>
                 ))}
             </div>

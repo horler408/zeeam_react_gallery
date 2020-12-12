@@ -6,7 +6,7 @@ import {
   Switch
 } from 'react-router-dom';
 import './App.css';
-import Preloader from './components/common/Preloader';
+//import Preloader from './components/common/Preloader';
 import { AuthProvider } from './context/AuthContext';
 import { FetchProvider } from './context/FetchContext';
 import AppWrapper from './AppWrapper';
@@ -74,7 +74,6 @@ const AppRoutes = () => {
 function App() {
   return (
     <>
-    <Preloader />
     <Router>
       <AuthProvider>
         <FetchProvider>
