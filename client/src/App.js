@@ -6,6 +6,7 @@ import {
   Switch
 } from 'react-router-dom';
 import './App.css';
+import Preloader from './components/common/Preloader';
 import { AuthProvider } from './context/AuthContext';
 import { FetchProvider } from './context/FetchContext';
 import AppWrapper from './AppWrapper';
@@ -49,9 +50,11 @@ const AppRoutes = () => {
           <Home />
         </AppWrapper>
       </Route>
-      <AuthenticatedRoute exact path="/gallery">
-        <Gallery />
-      </AuthenticatedRoute>
+      <Route exact path="/gallery">
+        <AppWrapper>
+          <Gallery />
+        </AppWrapper>
+      </Route>
       <Route exact path="/gallery/:id">
         <Details />
       </Route>
@@ -70,6 +73,8 @@ const AppRoutes = () => {
 
 function App() {
   return (
+    <>
+    <Preloader />
     <Router>
       <AuthProvider>
         <FetchProvider>
@@ -79,6 +84,7 @@ function App() {
         </FetchProvider>
       </AuthProvider>
     </Router>
+    </>
   );
 }
 

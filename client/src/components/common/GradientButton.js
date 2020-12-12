@@ -6,7 +6,7 @@ import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 const GradientButton = ({
   type,
   text,
-  style,
+  styleName,
   loading,
   onClick
 }) => {
@@ -14,7 +14,7 @@ const GradientButton = ({
   return (
     <button
       type={type}
-      className={style}
+      className={styleName}
       onClick={onClick}
     >
       {loading ? (

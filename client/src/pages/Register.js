@@ -97,7 +97,7 @@ export default function Register() {
                             />
                             <div>
                             <div className="names form_div">
-                                <div>
+                                <div className="names_item">
                                 <div className="label">
                                     <Label text="First Name" />
                                 </div>
@@ -109,7 +109,7 @@ export default function Register() {
                                 />
                                 </div>
 
-                                <div>
+                                <div className="names_item">
                                 <div className="label">
                                     <Label text="Last Name" />
                                 </div>
@@ -161,7 +161,7 @@ export default function Register() {
 
                             <div>
                             <GradientButton
-                                style="reg-btn"
+                                styleName="reg-btn"
                                 type="submit"
                                 text="Sign Up"
                                 loading={loginLoading}

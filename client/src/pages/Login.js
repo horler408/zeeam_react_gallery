@@ -46,20 +46,20 @@ const Login = () => {
   return (
     <>
       {redirectOnLogin && <Redirect to='dashboard' />}
-      <section className="w-full sm:w-1/2 h-screen m-auto p-8 sm:pt-10">
-          <div className="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-md w-full">
+      <section>
+          <div className="login_container">
+            <div className="login_card">
               <div>
                 <div className="avatar">
                   <img src={logo} alt="Logo" />
                 </div>
-                <h2 className="mb-2 text-center text-3xl leading-9 font-extrabold text-gray-900">
+                <h2 className="form_info">
                   Log in to your account
                 </h2>
-                <p className="text-gray-600 text-center">
+                <p className="form_info">
                   Don't have an account?{' '}
                   <Hyperlink
-                    to="signup"
+                    to="register"
                     text="Sign up now"
                   />
                 </p>
@@ -76,7 +76,7 @@ const Login = () => {
                 validationSchema={LoginSchema}
               >
                 {() => (
-                  <Form className="mt-8">
+                  <Form className="form">
                     {loginSuccess && (
                       <FormSuccess text={loginSuccess} />
                     )}
@@ -84,22 +84,25 @@ const Login = () => {
                       <FormError text={loginError} />
                     )}
                     <div>
-                      <div className="mb-2">
-                        <div className="mb-1">
+                      <div className="form_div">
+                        <div className="label">
                           <Label text="Email" />
                         </div>
                         <FormInput
+                          styleName="form_input"
                           ariaLabel="Email"
                           name="email"
                           type="text"
                           placeholder="Email"
                         />
                       </div>
-                      <div>
-                        <div className="mb-1">
+
+                      <div className="form_div">
+                        <div className="label">
                           <Label text="Password" />
                         </div>
                         <FormInput
+                          styleName="form_input"
                           ariaLabel="Password"
                           name="password"
                           type="password"
@@ -108,8 +111,8 @@ const Login = () => {
                       </div>
                     </div>
 
-                    <div className="mt-6 flex justify-start">
-                      <div className="text-sm leading-5">
+                    <div className="form_info">
+                      <div>
                         <Hyperlink
                           to="forgot-password"
                           text="Forgot your password?"
@@ -117,8 +120,9 @@ const Login = () => {
                       </div>
                     </div>
 
-                    <div className="mt-6">
+                    <div>
                       <GradientButton
+                        styleName="log-btn"
                         type="submit"
                         text="Log In"
                         loading={loginLoading}

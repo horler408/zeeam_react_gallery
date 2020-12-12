@@ -7,7 +7,7 @@ import Input from './Input';
 const FormInput = ({
   name,
   type,
-  style,
+  styleName,
   placeholder
 }) => {
   const [field, meta] = useField(name);
@@ -17,7 +17,7 @@ const FormInput = ({
         field={field}
         name={field.name}
         type={type}
-        className={style}
+        className={styleName}
         placeholder={placeholder}
       />
       {meta.touched && meta.error ? (
