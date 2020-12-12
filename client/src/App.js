@@ -15,6 +15,7 @@ import FourOFour from './pages/FourOFour';
 import Home from './pages/Home';
 import Gallery from './pages/Gallery';
 import Details from './pages/Details';
+import Update from './pages/Update';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Users from './pages/Users';
@@ -55,8 +56,15 @@ const AppRoutes = () => {
           <Gallery />
         </AppWrapper>
       </Route>
-      <Route exact path="/gallery/:id">
-        <Details />
+      <Route path="/gallery/:id">
+        <AppWrapper>
+          <Details />
+        </AppWrapper>
+      </Route>
+      <Route path="/update/:id">
+        <AppWrapper>
+          <Update />
+        </AppWrapper>
       </Route>
       <AuthenticatedRoute exact path="/gallery">
         <Dashboard />

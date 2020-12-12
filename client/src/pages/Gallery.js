@@ -52,7 +52,7 @@ export default function Gallery() {
                 
             <div className="gallery_contents">
                 {products.map(product => (    
-                    <div className="gallery_items">
+                    <div className="gallery_items" key={product._id}>
                         <img src={product.imageUrl} alt={product.title} />
                         <div className="title">{product.title.toUpperCase()}</div>
                         <div className="price">{product.price}</div>

@@ -1,26 +1,26 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
-import { publicFetch } from './../util/fetch';
+import Axios from 'axios';
 
-export default function Details({ history, match }) {
+function Details ({ history, match }) {
     console.log(match);
-
     const [product, setProduct] = useState([])
-    //const id = match.params._id
+    
+    const id = match.params._id
+    const url = `http://localhost:3001/api/product/:${id}`
 
     useEffect(() => {
         const getProduct = async () => {
             try {
-                const { data } = await publicFetch.get(
-                  `product`
-                );
-                setProduct(data);
+                const response = await Axios.get(url)
+                const result = await response.data 
+        
+                setProduct(result);
               } catch (err) {
                 console.log(err);
               }
-            };
-
-        //getProduct();
+        }
+        getProduct();
     }, [])
 
     return (
@@ -43,12 +43,16 @@ export default function Details({ history, match }) {
                         <input type="text" value={product._id} name="productId"/>
                     </div>
                     <div>
-                        <button className="update_btn"
-                        onClick={() => history.push(`/update/${product._id}`)}
-                        >Update</button>
-                        <button className="delete_btn"
-                        onClick={() => history.push(`/delete/${product._id}`)}
-                        >Delete</button>
+                        <div className="update_btn">
+                            <Link to={`/update/${id}`}>
+                                Update
+                            </Link>
+                        </div>
+                        <div className="delete_btn">
+                            <Link to={`/delete/${id}`}>
+                                Delete
+                            </Link>
+                        </div>
                     </div>
                 </div>
                 <button className="order_btn"
@@ -59,3 +63,5 @@ export default function Details({ history, match }) {
 
     )
 }
+
+export default Details;
