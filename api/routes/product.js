@@ -14,10 +14,10 @@ router.post("/", multer, productCrtl.createProduct);
 
 router.get("/:id", productCrtl.getOneProduct);
 
-router.post("/edit/:id", multer, productCrtl.modifyProduct);
+router.patch("/:id", multer, productCrtl.modifyProduct);
 router.get("/update/:id", productCrtl.editForm);
 
-router.post("/:id", productCrtl.deleteProduct);
+router.delete("/:id", productCrtl.deleteProduct);
 //router.post("/:id", productCrtl.deleteItem)
 
 

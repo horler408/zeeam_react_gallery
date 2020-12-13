@@ -56,10 +56,8 @@ const AppRoutes = () => {
           <Gallery />
         </AppWrapper>
       </Route>
-      <Route path="/gallery/:id">
-        <AppWrapper>
-          <Details />
-        </AppWrapper>
+      <Route path="/gallery/:id" render={(props) => <Details {...props}/>}>
+      
       </Route>
       <Route path="/update/:id">
         <AppWrapper>

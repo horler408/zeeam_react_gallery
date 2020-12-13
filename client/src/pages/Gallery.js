@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom';
 import publicFetch from './../util/fetch';
 
 
-export default function Gallery() {
+export default function Gallery({...rest}) {
     //const fetchContext = useContext(FetchContext);
     const [products, setProducts] = useState([])
 
-    const baseUrl = process.env.API_URL
+    //const baseUrl = process.env.API_URL
 
     /*useEffect(() => {
         const getProducts = async () => {
@@ -49,15 +49,19 @@ export default function Gallery() {
                 </select>
             </div>
             <div className="gallery_info"></div>
-                
+               
             <div className="gallery_contents">
-                {products.map(product => (    
-                    <div className="gallery_items" key={product._id}>
-                        <img src={product.imageUrl} alt={product.title} />
-                        <div className="title">{product.title.toUpperCase()}</div>
-                        <div className="price">{product.price}</div>
-                        <p className="item_order"><Link to={`/gallery/${product._id}`}>{product.description}</Link></p>
-                    </div>
+                {products.map(product => (
+                    <div className="gallery_items" key={product._id} >
+                      <img src={product.imageUrl} alt={product.title} />
+                      <div className="title">{product.title.toUpperCase()}</div>
+                      <div className="price">{product.price}</div>
+                      <p className="item_order">
+                        <Link to={`/gallery/${product._id}`}>
+                          {product.description}
+                        </Link>
+                      </p>
+                    </div>   
                 ))}
             </div>
         </div>
