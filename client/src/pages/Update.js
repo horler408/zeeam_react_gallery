@@ -24,7 +24,7 @@ export default function Update({ match }) {
             setProduct(result)
         }
         getProduct()
-    }, [])
+    }, [id])
 
     const handleChange = (e) => {
         setProduct({[e.target.name]: e.target.value})

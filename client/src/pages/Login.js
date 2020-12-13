@@ -37,6 +37,7 @@ const Login = () => {
       }, 1000);
     } catch (error) {
       setLoginLoading(false);
+      setRedirectOnLogin(false)
       const { data } = error.response;
       setLoginError(data.message);
       setLoginSuccess(null);
@@ -127,6 +128,9 @@ const Login = () => {
                         text="Log In"
                         loading={loginLoading}
                       />
+                      <p className="home_return">Return to{' '}
+                        <Hyperlink to="/" text="Home" />
+                      </p>
                     </div>
                   </Form>
                 )}

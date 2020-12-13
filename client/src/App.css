@@ -16,6 +16,13 @@ body {
 a {
   text-decoration: none;
 }
+.anchor {
+  color: grey;
+}
+.anchor:hover {
+  outline: none;
+  border-bottom: 2px solid grey;
+}
 
 li {
   list-style: none;
@@ -24,6 +31,25 @@ li {
 h1 {
   text-align: center;
   text-transform: capitalize;
+}
+
+.not-found {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: grey;
+}
+.not-found h2 {
+  font-size: 5rem;
+}
+.not-found p {
+  height: 10vh;
+  background: #333;
+  color: #fff;
+  padding: 10px;
+  font-size: 32px;
+  text-align: center;
 }
 
 .container {
@@ -79,7 +105,18 @@ form div {
 
 .form_info {
   text-align: center;
+  margin: 10px;
   color: grey;
+}
+
+.home_return {
+  position: relative;
+  text-align: right;
+  left: 170px;
+  width: 50%;
+  top: -40px;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .label {
@@ -103,7 +140,6 @@ form div {
   padding: 12px 45px;
   letter-spacing: 1px;
   cursor: pointer;
-  pointer-events: all;
   text-transform: uppercase;
   transition: transform 80ms ease-in;
 }
@@ -171,18 +207,6 @@ button:focus {
 
 .info img {
   height: 100%;
-}
-
-@keyframes animate {
-  0%,
-  10%,
-  100% {
-    width: 0;
-  }
-  70%,
-  90% {
-    width: 100%;
-  }
 }
 
 /* Gallery */
@@ -528,17 +552,9 @@ hr {
 
 .alert_success,
 .success_msg {
-  color: lightgreen;
+  color: green;
   text-align: center;
   margin: 10px;
-}
-
-.error-message {
-  position: absolute;
-  top: 60px;
-  color: hsl(0, 87%, 67%);
-  font-size: 0.5rem;
-  width: 100%;
 }
 
 /* Preloader */
@@ -584,8 +600,9 @@ hr {
     /* padding: 0rem 3rem; */
     box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2), 0px 0px 50px rgba(0, 0, 0, 0.2);
   }
+
   .login_card {
-    /* height: 50vh; */
+    width: 40%;
   }
 
   .home_card,
@@ -868,6 +885,18 @@ hr {
 }
 
 /* KeyFrames */
+@keyframes animate {
+  0%,
+  10%,
+  100% {
+    width: 0;
+  }
+  70%,
+  90% {
+    width: 100%;
+  }
+}
+
 @keyframes animateIn {
   from {
     opacity: 0;

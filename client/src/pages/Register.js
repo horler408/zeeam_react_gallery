@@ -21,7 +21,7 @@ const SignupSchema = Yup.object().shape({
     email: Yup.string()
       .email('Invalid email')
       .required('Email is required'),
-    phone: Yup.string().matches(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/, 'Phone number is not valid!').required('Phone Number is required!'),
+    phone: Yup.string().matches(/^\(?([0-9]{4})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/, 'Phone number is not valid!').required('Phone Number is required!'),
     password: Yup.string().required('Password is required')
   });
 
@@ -102,7 +102,8 @@ export default function Register() {
                                     <Label text="First Name" />
                                 </div>
                                 <FormInput
-                                    style="form_input"
+                                    ariaLabel="First Name"
+                                    styleName="form_input"
                                     name="firstName"
                                     type="text"
                                     placeholder="First Name"
@@ -114,7 +115,8 @@ export default function Register() {
                                     <Label text="Last Name" />
                                 </div>
                                 <FormInput
-                                    style="form_input"
+                                    ariaLabel="Last Name"
+                                    styleName="form_input"
                                     name="lastName"
                                     type="text"
                                     placeholder="Last Name"
@@ -127,7 +129,8 @@ export default function Register() {
                                     <Label text="Email Address" />
                                 </div>
                                 <FormInput
-                                style="form_input"
+                                ariaLabel="Email"
+                                styleName="form_input"
                                 name="email"
                                 type="email"
                                 placeholder="Email Address"
@@ -138,7 +141,8 @@ export default function Register() {
                                     <Label text="Phone Number" />
                                 </div>
                                 <FormInput
-                                style="form_input"
+                                ariaLabel="Phone Number"
+                                styleName="form_input"
                                 name="phone"
                                 type="text"
                                 placeholder="Phone Number"
@@ -150,8 +154,8 @@ export default function Register() {
                                     <Label text="Password" />
                                 </div>
                                 <FormInput
-                                style="form_input"
                                 ariaLabel="Password"
+                                styleName="form_input"
                                 name="password"
                                 type="password"
                                 placeholder="Password"
@@ -166,6 +170,9 @@ export default function Register() {
                                 text="Sign Up"
                                 loading={loginLoading}
                             />
+                            <p className="home_return">Return to{' '}
+                                <Hyperlink to="/" text="Home" />
+                            </p>
                             </div>
                         </Form>
                         )}
