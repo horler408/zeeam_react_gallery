@@ -21,7 +21,7 @@ const SignupSchema = Yup.object().shape({
     email: Yup.string()
       .email('Invalid email')
       .required('Email is required'),
-    phone: Yup.string().matches(/^\(?([0-9]{4})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/, 'Phone number is not valid!').required('Phone Number is required!'),
+    phone: Yup.string().matches(/^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g, 'Phone number is not valid!').required('Phone Number is required!'),
     password: Yup.string().required('Password is required')
   });
 

@@ -1,17 +1,13 @@
-import Axios from 'axios'
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
-//import { FetchContext } from './../context/FetchContext';
-import publicFetch from './../util/fetch';
+import { publicFetch } from './../util/fetch';
 
 
-export default function Gallery({...rest}) {
-    //const fetchContext = useContext(FetchContext);
+export default function Gallery() {
+    
     const [products, setProducts] = useState([])
 
-    //const baseUrl = process.env.API_URL
-
-    /*useEffect(() => {
+    useEffect(() => {
         const getProducts = async () => {
           try {
             const { data } = await publicFetch.get(
@@ -24,9 +20,9 @@ export default function Gallery({...rest}) {
         };
     
         getProducts();
-      }, [baseUrl]);*/
+      }, [publicFetch]);
 
-    useEffect(() => {
+    /*useEffect(() => {
         const getResource = async () => {
             const response = await Axios.get(`http://localhost:3001/api/product`);
             const result = await response.data
@@ -34,7 +30,7 @@ export default function Gallery({...rest}) {
             setProducts(result)
         }
         getResource()
-    }, [])
+    }, [])*/
 
     return (
 

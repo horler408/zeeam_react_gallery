@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { FetchContext } from './../context/FetchContext';
-import Axios from 'axios';
+import { publicFetch } from './../util/fetch';
 import { Redirect } from 'react-router-dom';
 import FormError from './../components/FormError';
 import FormSuccess from './../components/FormSuccess';
@@ -8,26 +8,39 @@ import FormSuccess from './../components/FormSuccess';
 export default function Update({ match }) {
     
     const fetchContext = useContext(FetchContext);
-    const [product, setProduct] = useState()
+    const [product, setProduct] = useState([])
     const [redirectOnUpdate, setRedirectOnUpdate] = useState(false)
     const [successMessage, setSuccessMessage] = useState();
     const [errorMessage, setErrorMessage] = useState();
+    const [title, setTitle] = useState(product.title);
+    const [description, setDescription] = useState()
+    const [price, setPrice] = useState()
+    const [category, setCategory] = useState()
+    const [values, setValues] = useState({})
     
-
-    const id = match.params._id
-    
+    const id = match.params.id;
 
     useEffect(() => {
         const getProduct = async () => {
-            const response = await Axios.get(`http://localhost/api/product/update/${id}`)
-            const result = await response.data
-            setProduct(result)
+            try {
+                const { data } = await publicFetch.get(
+                  `product/update/${id}`
+                );
+                console.log(data);
+                setProduct(data);
+            } catch (err) {
+                console.log(err);
+            }
         }
-        getProduct()
-    }, [id])
 
-    const handleChange = (e) => {
-        setProduct({[e.target.name]: e.target.value})
+        getProduct();
+    }, [])
+
+    function handleChange(e) {
+		values[e.target.name] = e.target.value
+		setValues({
+			values
+		});
     }
 
     const handleSubmit = async () => {
@@ -54,6 +67,7 @@ export default function Update({ match }) {
             {redirectOnUpdate && <Redirect to='/gallery' />}
             <section>
                 <div className="update_card">
+                    <h2>Product Update</h2>
                     {successMessage && (<FormSuccess text={successMessage} />)}
                     {errorMessage && <FormError text={errorMessage} />}
                     <form onSubmit={() => handleSubmit}>
@@ -61,28 +75,27 @@ export default function Update({ match }) {
                             <label htmlFor="id">Product Id<span className="red_info"> *</span></label>
                             <input type="text" id="id" name="id" required
                             value={product._id}
-                            onChange={handleChange}
                             />
                         </div>
                         <div className="product_name">
                             <label htmlFor="title">Title<span className="red_info"> *</span></label>
                             <input type="text" id="title" name="title" required
-                            value={product.title}
-                            onChange={handleChange}
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
                             />
                         </div>
-                        <div class="description">
-                            <label for="description">Description<span class="red_info"> *</span></label>
+                        <div className="description">
+                            <label htmlFor="description">Description<span className="red_info"> *</span></label>
                             <textarea name="description" id="description" cols="30" rows="5" required
-                            value={product.description}
-                            onChange={handleChange}
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
                             >
                             </textarea>
                         </div>
-                        <div class="category">
+                        <div className="category">
                             <select name="category" id="category"
-                            value={product.category}
-                            onChange={handleChange}
+                            value={category}
+                            onChange={(e) => setCategory(e.target.value)}
                             >
                                 <option value="">Choose category</option>
                                 <option value="fabrics">Fabrics</option>
@@ -91,18 +104,14 @@ export default function Update({ match }) {
                                 <option value="ornaments">Ornaments</option>
                             </select>
                         </div>
-                        <div class="price_form">
-                            <label for="price">Price<span class="red_info"> *</span></label>
+                        <div className="price_form">
+                            <label htmlFor="price">Price<span className="red_info"> *</span></label>
                             <input type="text" id="price" name="price" required
-                            value={product.price}
-                            onChange={handleChange}
+                            value={price}
+                            onChange={(e) => setPrice(e.target.value)}
                             />
                         </div>
-                        <div class="product_image">
-                            <label for="image">Image Upload</label>
-                            <input type="file" id="image" name="imageUrl" />
-                        </div>
-                        <button type="submit" class="update_btn">Submit</button>
+                        <button type="submit" className="update_btn">Update</button>
                     </form>
                 </div>
             </section>

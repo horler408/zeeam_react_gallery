@@ -6,7 +6,6 @@ import {
   Switch
 } from 'react-router-dom';
 import './App.css';
-//import Preloader from './components/common/Preloader';
 import { AuthProvider } from './context/AuthContext';
 import { FetchProvider } from './context/FetchContext';
 import AppWrapper from './AppWrapper';
@@ -57,11 +56,7 @@ const AppRoutes = () => {
         </AppWrapper>
       </Route>
       <Route path="/gallery/:id" render={(props) => <Details {...props}/>}></Route>
-      <Route path="/update/:id">
-        <AppWrapper>
-          <Update />
-        </AppWrapper>
-      </Route>
+      <Route path="/update/:id" render={(props) => <Update {...props}/>}></Route>
       <AuthenticatedRoute exact path="/dashboard">
         <Dashboard />
       </AuthenticatedRoute>

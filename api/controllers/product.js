@@ -89,17 +89,6 @@ exports.editForm = (req, res) => {
 }
 exports.modifyProduct = (req, res) => {
   let product = new Product({ _id: req.params.id });
-  if (req.file) {
-    const url = req.protocol + "://" + req.get("host");
-    product = {
-      _id: req.params.id,
-      title: req.body.title,
-      description: req.body.description,
-      imageUrl: url + "/images/" + req.file.filename,
-      price: req.body.price,
-      category: req.body.category
-    };
-  } else {
     product = {
       _id: req.params.id,
       title: req.body.title,
@@ -108,7 +97,7 @@ exports.modifyProduct = (req, res) => {
       price: req.body.price,
       category: req.body.category
     };
-  }  
+ 
   Product.updateOne({ _id: req.params.id }, product)
     .then(() => {
       res.status(200).json({
