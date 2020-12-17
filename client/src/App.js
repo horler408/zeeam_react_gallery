@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, lazy, Suspense } from 'react';
 import {
   BrowserRouter as Router,
   Redirect,
@@ -9,16 +9,19 @@ import './App.css';
 import { AuthProvider } from './context/AuthContext';
 import { FetchProvider } from './context/FetchContext';
 import AppWrapper from './AppWrapper';
-import Dashboard from './pages/Dashboard';
+import Preloader from './components/common/Preloader';
 import FourOFour from './pages/FourOFour';
 import Home from './pages/Home';
 import Gallery from './pages/Gallery';
-import Details from './pages/Details';
-import Update from './pages/Update';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import Users from './pages/Users';
 import { AuthContext } from './context/AuthContext';
+
+const Dashboard = lazy(() => import('./pages/Dashboard'));
+const Inventory = lazy(() => import('./pages/Inventory'));
+const Users = lazy(() => import('./pages/Users'));
+const Details = lazy(() => import('./pages/Details'));
+const Update = lazy(() => import('./pages/Update'));
 
 const AuthenticatedRoute = ({ children, ...rest }) => {
   const authContext = useContext(AuthContext);
@@ -35,38 +38,58 @@ const AuthenticatedRoute = ({ children, ...rest }) => {
   )
 }
 
+const AdminRoute = ({ children, ...rest }) => {
+  const authContext = useContext(AuthContext);
+  return (
+    <Route {...rest} render={() =>
+      authContext.isAuthenticated() && authContext.isAdmin() ? (
+        <AppWrapper>
+          {children}
+        </AppWrapper>
+      ) : (
+        <Redirect to="/" />
+      )
+    } />
+  )
+}
+
 const AppRoutes = () => {
 
   return (
-    <Switch>
-      <Route path="/login">
-        <Login />
-      </Route>
-      <Route path="/register">
-        <Register />
-      </Route>
-      <Route exact path="/">
-        <AppWrapper>
-          <Home />
-        </AppWrapper>
-      </Route>
-      <Route exact path="/gallery">
-        <AppWrapper>
-          <Gallery />
-        </AppWrapper>
-      </Route>
-      <Route path="/gallery/:id" render={(props) => <Details {...props}/>}></Route>
-      <Route path="/update/:id" render={(props) => <Update {...props}/>}></Route>
-      <AuthenticatedRoute exact path="/dashboard">
-        <Dashboard />
-      </AuthenticatedRoute>
-      <Route path="/users">
-        <Users />
-      </Route>
-      <Route path="*">
-        <FourOFour />
-      </Route>
-    </Switch>
+    <Suspense fallback={<Preloader />}>
+      <Switch>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/register">
+          <Register />
+        </Route>
+        <Route exact path="/">
+          <AppWrapper>
+            <Home />
+          </AppWrapper>
+        </Route>
+        <Route exact path="/gallery">
+          <AppWrapper>
+            <Gallery />
+          </AppWrapper>
+        </Route>
+        <Route path="/gallery/:id" render={(props) => <Details {...props}/>}></Route>
+        <Route path="/update/:id" render={(props) => <Update {...props}/>}></Route>
+        <AuthenticatedRoute exact path="/dashboard">
+          <Dashboard />
+        </AuthenticatedRoute>
+        <AdminRoute path="/inventory">
+          <Inventory />
+        </AdminRoute>
+        <AdminRoute path="/users">
+          <Users />
+        </AdminRoute>
+        <Route path="*">
+          <FourOFour />
+        </Route>
+      </Switch>
+    </Suspense>
   );
 };
 

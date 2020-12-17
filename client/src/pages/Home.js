@@ -1,7 +1,4 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import GradientLink from '../components/common/GradientLink';
-import GradientBar from './../components/GradientBar';
 //import logo from './../images/logo.png';
 import { AuthContext } from './../context/AuthContext';
 

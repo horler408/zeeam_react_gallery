@@ -1,21 +1,25 @@
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken');
 
-module.exports = (req, res, next) => {
-  try {
-    const token = req.headers.authorization.split(" ")[1];
-    const decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET");
-    const userId = decodedToken.userId;
-    if (req.body.userId && req.body.userId !== userId) {
-      req.flash("error_msg", "Unauthorized to Non admin user")
-      res.redirect("/")
-    } else {
-      next();
+const attachUser = (req, res, next) => {
+    const token = req.headers.authorization
+    if(!token) {
+      return res.status(401).json({message: 'Authentication Invalid!'})
     }
-  } catch {
-    req.flash("error_msg", "Unauthorised User, only admin is authorised to access that page")
-    res.redirect("/")
-    // res.status(401).json({
-    //   message: "Invalid request!"
-    // });
+  
+    const decodedToken = jwtDecode(token.slice(7))
+  
+    if(!decodedToken) {
+      return res.status(401).json({message: 'There was a problem authorizing the request'})
+    } else {
+      req.user = decodedToken
+      next()
+    }
   }
-};
+  
+/*
+module.exports = jwt({
+    secret: process.env.JWT_SECRET,
+    issuer: 'api.orbit',
+    audience: 'api.orbit'
+})*/
+

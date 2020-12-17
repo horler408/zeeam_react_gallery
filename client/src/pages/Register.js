@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import logo from './../assets/register.png';
@@ -21,7 +21,7 @@ const SignupSchema = Yup.object().shape({
     email: Yup.string()
       .email('Invalid email')
       .required('Email is required'),
-    phone: Yup.string().matches(/^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g, 'Phone number is not valid!').required('Phone Number is required!'),
+    phone: Yup.string().matches(/^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s./0-9]*$/g, 'Phone number is not valid!').required('Phone Number is required!'),
     password: Yup.string().required('Password is required')
   });
 

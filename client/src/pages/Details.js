@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, Redirect } from 'react-router-dom';
 import { publicFetch } from './../util/fetch';
 import FormSuccess from './../components/FormSuccess';
@@ -28,7 +28,7 @@ const Details = ({ match, history }) => {
         }
 
         getProduct();
-    }, [])
+    }, [id])
 
     const handleDelete = async (item) => {
         try {

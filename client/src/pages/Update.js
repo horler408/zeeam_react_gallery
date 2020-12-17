@@ -16,7 +16,7 @@ export default function Update({ match }) {
     const [description, setDescription] = useState()
     const [price, setPrice] = useState()
     const [category, setCategory] = useState()
-    const [values, setValues] = useState({})
+    //const [values, setValues] = useState({})
     
     const id = match.params.id;
 
@@ -34,14 +34,14 @@ export default function Update({ match }) {
         }
 
         getProduct();
-    }, [])
+    }, [id])
 
-    function handleChange(e) {
-		values[e.target.name] = e.target.value
-		setValues({
-			values
-		});
-    }
+    // function handleChange(e) {
+	// 	values[e.target.name] = e.target.value
+	// 	setValues({
+	// 		values
+	// 	});
+    // }
 
     const handleSubmit = async () => {
         try {

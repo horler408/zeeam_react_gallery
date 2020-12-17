@@ -35,6 +35,10 @@ exports.login = async (req, res) => {
   
         const decodedToken = jwtDecode(token);
         const expiresAt = decodedToken.exp;
+
+        res.cookie('token', token, {
+          httpOnly: true
+        })
   
         res.json({
           message: 'Authentication successful!',
@@ -105,6 +109,10 @@ exports.register = async (req, res) => {
           phone,
           role
         };
+
+        res.cookie('token', token, {
+          httpOnly: true
+        })
   
         return res.json({
           message: 'User created!',
