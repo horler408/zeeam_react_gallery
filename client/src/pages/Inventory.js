@@ -5,7 +5,6 @@ import React, {
   } from 'react';
   
 import { FetchContext } from '../context/FetchContext';
-import { formatCurrency } from './../util';
 import InventoryItemForm from './../components/InventoryForm';
 import DangerButton from './../components/common/DangerButton';
 import FormError from './../components/FormError';
@@ -22,7 +21,7 @@ const InventoryItem = ({ item, onDelete }) => {
       <div className="flex">
         <img
           className="rounded w-32 h-full"
-          src={item.image}
+          src={item.imageUrl}
           alt="inventory"
         />
         <div className="flex justify-between w-full">
@@ -32,12 +31,17 @@ const InventoryItem = ({ item, onDelete }) => {
                 {item.name}
               </p>
               <p className="text-sm text-gray-600">
-                {item.itemNumber}
+                {item.description}
               </p>
             </div>
             <div>
               <p className="text-gray-700 text-xl">
-                {formatCurrency(item.unitPrice)}
+                {(item.price)}
+              </p>
+            </div>
+            <div>
+              <p className="text-gray-700 text-xl">
+                {(item.category)}
               </p>
             </div>
           </div>

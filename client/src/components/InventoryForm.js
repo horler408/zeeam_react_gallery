@@ -8,7 +8,9 @@ import GradientButton from './common/GradientButton';
 const InventoryItemSchema = Yup.object().shape({
   name: Yup.string().required('Product Name is required'),
   description: Yup.string().required('Description is required'),
-  price: Yup.string().required('Unit price is required')
+  price: Yup.string().required('Unit price is required'),
+  category: Yup.string().required('Category selection is required'),
+  imageUrl: Yup.string().required('You must choose an image to upload')
 });
 
 
@@ -20,6 +22,7 @@ const InventoryItemForm = ({ onSubmit }) => {
         description: '',
         price: '',
         category: '',
+        imageUrl: ''
       }}
       onSubmit={(values, { resetForm }) =>
         onSubmit(values, resetForm)
@@ -29,9 +32,9 @@ const InventoryItemForm = ({ onSubmit }) => {
     >
       {() => (
         <Form>
-          <div className="flex flex-col md:flex-row">
-            <div className="w-full md:w-1/3 mr-2 mb-2 sm:mb-0">
-              <div className="mb-1">
+          <div className="">
+            <div className="">
+              <div className="">
                 <Label text="Item Name" />
               </div>
               <FormInput
@@ -42,20 +45,20 @@ const InventoryItemForm = ({ onSubmit }) => {
               />
             </div>
 
-            <div className="w-full md:w-1/3 mr-2 mb-2 sm:mb-0">
-              <div className="mb-1">
+            <div className="">
+              <div className="">
                 <Label text="Description" />
               </div>
               <FormInput
                 ariaLabel="Description"
                 name="description"
                 type="text"
-                placeholder="Product Description"
+                placeholder="Write a brief description of the product"
               />
             </div>
 
-            <div className="w-full md:w-1/3 mr-2 mb-2 sm:mb-0">
-              <div className="mb-1">
+            <div className="">
+              <div className="">
                 <Label text="Price" />
               </div>
               <FormInput
@@ -63,6 +66,26 @@ const InventoryItemForm = ({ onSubmit }) => {
                 name="price"
                 type="text"
                 placeholder="Unit Price"
+              />
+            </div>
+            <div className="">
+              <label htmlFor="category">Category</label>
+              <select className="" value="" onChange="">
+                <option value="">-Select Category-</option>
+                <option value="clothes">Clothes</option>
+                <option value="fabrics">Fabrics</option>
+                <option value="bed-sheets">Bed Sheets</option>
+                <option value="shoes">Shoes</option>
+                <option value="bags">Bags</option>
+              </select>
+            </div>
+
+            <div>
+              <label htmlFor="image-url">Image Upload</label>
+              <input className="" 
+                type="file"
+                value=""
+                onChange=""
               />
             </div>
           </div>

@@ -11,14 +11,11 @@ export default function NavBar() {
                 <div className="menu__item active"><Link to="/">Home</Link></div>
                 <div className="menu__item"><Link to="/gallery">Gallery</Link></div>
                 <div className="menu__item"><Link to="/dashboard">Dashboard</Link></div>
+                <div className="menu__item"><Link to="/inventory">Inventory</Link></div>
                 <div className="menu__item" id="register-btn"><Link to="/register">Register</Link></div>
                 <div className="menu__item" id="login-btn"><Link to="/login">Login</Link></div>
             </div>
-            <div className="sidebar__toggle">
-                <button className="head__sidebar-toggle">
-                <i className="fas fa-bars"></i>
-                </button>
-            </div>
+            
         </div>
     )
 }
