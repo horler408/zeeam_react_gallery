@@ -1,6 +1,6 @@
 
 exports.index = (req, res) => {
-    res.render('index');
+    res.send('API Home');
 }
 
 exports.roles = async (req, res) => {

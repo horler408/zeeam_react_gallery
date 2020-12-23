@@ -2,7 +2,9 @@ import React from 'react';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import Label from './../components/common/Label';
+import Hyperlink from './../components/common/Hyperlink';
 import FormInput from './common/FormInput';
+import FormSelect from './common/FormSelect'
 import GradientButton from './common/GradientButton';
 
 const InventoryItemSchema = Yup.object().shape({
@@ -33,11 +35,12 @@ const InventoryItemForm = ({ onSubmit }) => {
       {() => (
         <Form>
           <div className="">
-            <div className="">
-              <div className="">
+            <div className="form_div">
+              <div className="label">
                 <Label text="Item Name" />
               </div>
               <FormInput
+                styleName=""
                 ariaLabel="Name"
                 name="name"
                 type="text"
@@ -45,11 +48,12 @@ const InventoryItemForm = ({ onSubmit }) => {
               />
             </div>
 
-            <div className="">
-              <div className="">
+            <div className="form_div">
+              <div className="label">
                 <Label text="Description" />
               </div>
               <FormInput
+                styleName=""
                 ariaLabel="Description"
                 name="description"
                 type="text"
@@ -57,43 +61,54 @@ const InventoryItemForm = ({ onSubmit }) => {
               />
             </div>
 
-            <div className="">
-              <div className="">
+            <div className="form_div">
+              <div className="label">
                 <Label text="Price" />
               </div>
               <FormInput
+                styleName=""
                 ariaLabel="Price"
                 name="price"
                 type="text"
                 placeholder="Unit Price"
               />
             </div>
-            <div className="">
-              <label htmlFor="category">Category</label>
-              <select className="" value="" onChange="">
-                <option value="">-Select Category-</option>
-                <option value="clothes">Clothes</option>
-                <option value="fabrics">Fabrics</option>
-                <option value="bed-sheets">Bed Sheets</option>
-                <option value="shoes">Shoes</option>
-                <option value="bags">Bags</option>
-              </select>
+            
+            <div className="form_div">
+              <div className="label">
+                <Label text="Category" />
+              </div>
+              <FormSelect
+                className="form_select"
+                ariaLabel="Category"
+                name="category"
+                type="select"
+                placeholder="Category"
+              />
             </div>
 
-            <div>
-              <label htmlFor="image-url">Image Upload</label>
-              <input className="" 
+            <div className="form_div">
+              <div className="label">
+                <Label text="Image Upload" />
+              </div>
+              <FormInput
+                className="image_file"
+                ariaLabel="Image Upload"
+                name="imageUrl"
                 type="file"
-                value=""
-                onChange=""
               />
             </div>
           </div>
 
-          <div className="flex">
-            <div className="w-full sm:w-1/4 mt-4">
-              <GradientButton type="submit" text="Submit" />
-            </div>
+          <div>
+            <GradientButton
+              styleName="inv-btn" 
+              type="submit" 
+              text="Submit" 
+            />
+            <p className="home_return">Return to{' '}
+              <Hyperlink to="/" text="Home" />
+            </p>
           </div>
         </Form>
       )}

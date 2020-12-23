@@ -18,9 +18,9 @@ const GradientButton = ({
       onClick={onClick}
     >
       {loading ? (
-        <span className="flex items-center">
+        <span style={{display:"flex", justifyContent:"centre"}}>
           <FontAwesomeIcon icon={faCircleNotch} spin />
-          <span className="ml-2">Loading...</span>
+          <span style={{marginLeft:"10px"}}>Loading...</span>
         </span>
       ) : (
         <span>{text}</span>

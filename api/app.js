@@ -3,7 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
-const cookieParser = require('cookie-parser');
+//const cookieParser = require('cookie-parser');
 
 const stuffRoutes = require("./routes/product");
 const userRoutes = require("./routes/user");
@@ -23,7 +23,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // Cookie
-app.use(cookieParser);
+//app.use(cookieParser);
 
 // Static Files
 app.use("/images", express.static(path.join(__dirname, "images")));

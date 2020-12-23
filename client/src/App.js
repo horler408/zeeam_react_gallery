@@ -9,6 +9,7 @@ import './App.css';
 import { AuthProvider } from './context/AuthContext';
 import { FetchProvider } from './context/FetchContext';
 import AppWrapper from './AppWrapper';
+import AdminWrapper from './AdminWrapper'
 import Preloader from './components/common/Preloader';
 import FourOFour from './pages/FourOFour';
 import Home from './pages/Home';
@@ -79,9 +80,9 @@ const AppRoutes = () => {
         <AuthenticatedRoute exact path="/dashboard">
           <Dashboard />
         </AuthenticatedRoute>
-        <AdminRoute path="/inventory">
-          <Inventory />
-        </AdminRoute>
+        <Route path="/inventory">  
+            <Inventory />
+        </Route>
         <AdminRoute path="/users">
           <Users />
         </AdminRoute>

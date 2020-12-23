@@ -20,12 +20,7 @@ exports.createProduct = (req, res) => {
   }
 
   if (errors.length > 0) {
-    res.render("home", {
-      errors,
-      title,
-      description,
-      price
-    });
+    return errors
   }else {
     const product = new Product({
       title,
@@ -38,7 +33,7 @@ exports.createProduct = (req, res) => {
       .save()
       .then(() => {
         res.status(200).json({
-          message: "Product saves successfully!"
+          message: "Product saved successfully!"
         });
       })
       .catch(err => {

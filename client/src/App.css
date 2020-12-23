@@ -125,9 +125,13 @@ form div {
   margin: 5px;
 }
 
+.image_file {
+}
+
 .order_btn,
 .update_btn,
 .reg-btn,
+.inv-btn,
 .log-btn,
 .home-btn {
   border-radius: 20px;
@@ -447,6 +451,18 @@ button:focus {
   margin: 10px;
 }
 
+.danger_btn {
+  color: red;
+  font-weight: 600;
+  border: 1px solid red;
+  border-radius: 16px;
+  margin: 0 10px;
+}
+.danger_btn:hover {
+  color: #fff;
+  background: red;
+}
+
 /* Preloader */
 .preloader {
   position: fixed;
@@ -545,8 +561,48 @@ button:focus {
     font-size: 20px;
   }
 
+  /* Inventory */
+  .inventory_container {
+    width: 100%;
+    margin-top: 20vh;
+  }
+  .items_container {
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+    background: lightblue;
+  }
+  .inventory_item {
+    max-width: 1100px;
+    margin: auto;
+    overflow: auto;
+    padding: 0 2rem;
+    background: lightcoral;
+  }
+  .inventory_item .card {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 2rem;
+    background: #f1f1f1;
+    margin-bottom: 2rem;
+  }
+  .form_container {
+    width: 50%;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+  }
+  .inventory_form {
+  }
+  .form_header {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+  }
+
   /* Form */
-  form input {
+  form input,
+  .image_file {
     height: 40px;
     font-size: 18px;
     width: 100%;

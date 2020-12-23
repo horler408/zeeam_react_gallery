@@ -21,9 +21,6 @@ const AdminWrapper = ({ children }) => {
       {loading && <Preloader />}
       <GradientBar />
       <div className="flex">
-        <div className="sm:w-64 px-4 sm:px-8 pt-6 bg-white">
-          <Sidebar />
-        </div>
         <div>
           <div>
             <Navbar />
@@ -31,6 +28,9 @@ const AdminWrapper = ({ children }) => {
           <div>
             {children}
           </div>
+          <div className="sm:w-64 px-4 sm:px-8 pt-6 bg-white">
+            <Sidebar />
+        </div>
           <Footer />
         </div>
       </div>

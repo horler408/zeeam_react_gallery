@@ -7,59 +7,53 @@ import React, {
 import { FetchContext } from '../context/FetchContext';
 import InventoryItemForm from './../components/InventoryForm';
 import DangerButton from './../components/common/DangerButton';
+import Hyperlink from './../components/common/Hyperlink';
 import FormError from './../components/FormError';
 import FormSuccess from './../components/FormSuccess';
   
-const InventoryItemContainer = ({ children }) => (
-  <div className="bg-white rounded shadow-md mb-4 p-4">
-    {children}
-  </div>
-);
+// const InventoryItemContainer = ({ children }) => (
+//   <div className="items_container">
+//     {children}
+//   </div>
+// );
   
 const InventoryItem = ({ item, onDelete }) => {
   return (
-      <div className="flex">
-        <img
-          className="rounded w-32 h-full"
-          src={item.imageUrl}
-          alt="inventory"
-        />
-        <div className="flex justify-between w-full">
-          <div className="flex flex-col ml-4 justify-between">
-            <div>
-              <p className="font-bold text-xl text-gray-900">
+      <div className="inventory_item">
+        <section className="card">
+          <img
+            src={item.imageUrl}
+            alt="inventory"
+          />
+          <div className="item_wrapper">
+              <p className="">
                 {item.name}
               </p>
-              <p className="text-sm text-gray-600">
+              <p className="">
                 {item.description}
               </p>
-            </div>
-            <div>
-              <p className="text-gray-700 text-xl">
+              <p className="">
                 {(item.price)}
               </p>
-            </div>
-            <div>
-              <p className="text-gray-700 text-xl">
+              <p className="">
                 {(item.category)}
               </p>
-            </div>
           </div>
-          <div className="self-end">
+          <div className="">
             <DangerButton
               text="Delete"
               onClick={() => onDelete(item)}
             />
           </div>
-        </div>
+        </section>
       </div>
   );
 };
   
 const NewInventoryItem = ({ onSubmit }) => {
   return (
-      <section className="bg-white p-4 shadow-md rounded-md">
-        <p className="font-bold mb-2">New Inventory Item</p>
+      <section className="inventory_form">
+        <p className="form_header">New Inventory Item</p>
         <InventoryItemForm onSubmit={onSubmit} />
       </section>
   );
@@ -72,11 +66,12 @@ const Inventory = () => {
   const [errorMessage, setErrorMessage] = useState();
   
   useEffect(() => {
-      const getInventory = async () => {
-        try {
-          const { data } = await fetchContext.authAxios.get(
-            'inventory'
-          );
+    const getInventory = async () => {
+      try {
+        const { data } = await fetchContext.authAxios.get(
+          'product'
+        );
+          console.log(data);
           setInventory(data);
         } catch (err) {
           console.log('the err', err);
@@ -89,8 +84,7 @@ const Inventory = () => {
   const onSubmit = async (values, resetForm) => {
     try {
       const { data } = await fetchContext.authAxios.post(
-          'inventory',
-          values
+          'product', values
         );
         setInventory([...inventory, data.inventoryItem]);
         resetForm();
@@ -128,25 +122,24 @@ const Inventory = () => {
   };
   
   return (
-    <>
-        {successMessage && (
-          <FormSuccess text={successMessage} />
-        )}
+    <div className="inventory_container">
+        {successMessage && (<FormSuccess text={successMessage} />)}
         {errorMessage && <FormError text={errorMessage} />}
-        <div className="mb-4">
+        <div className="form_container">
           <NewInventoryItem onSubmit={onSubmit} />
         </div>
-        {inventory && inventory.length
-          ? inventory.map(item => (
-              <InventoryItemContainer key={item._id}>
-                <InventoryItem
-                  item={item}
-                  onDelete={onDelete}
-                />
-              </InventoryItemContainer>
-            ))
-          : 'No Inventory Items'}
-    </>
+        <div className="items_container">
+          {inventory && inventory.length
+            ? inventory.map(item => (
+                  <InventoryItem
+                    key={item._id}
+                    item={item}
+                    onDelete={onDelete}
+                  />
+              ))
+            : 'No Inventory Items'}
+        </div>
+    </div>
   );
 };
   

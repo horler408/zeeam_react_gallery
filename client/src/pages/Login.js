@@ -35,6 +35,7 @@ const Login = () => {
       setTimeout(() => {
         setRedirectOnLogin(true)
       }, 1000);
+      setLoginLoading(false)
     } catch (error) {
       setLoginLoading(false);
       setRedirectOnLogin(false)
