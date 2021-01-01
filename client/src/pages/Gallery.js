@@ -5,17 +5,10 @@ import { Link } from 'react-router-dom';
 import { publicFetch } from './../util/fetch';
 
 const cssLoader = css`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: #fff;
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  visibility: visible;
-  z-index: 999;
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%)
   transition: all 0.3s linear;
 `;
 
@@ -53,7 +46,6 @@ export default function Gallery() {
 
     return (
       <>
-        <RingLoader css={cssLoader} loading={loading} size={100} />
         <div className="gallery_container">
             <div className="select">
                 <select name="category" id="select">
@@ -67,6 +59,7 @@ export default function Gallery() {
             <div className="gallery_info"></div>
                
             <div className="gallery_contents">
+              <RingLoader css={cssLoader} loading={loading} size={100} />
                 {products.map(product => (
                     <div className="gallery_items" key={product._id} >
                       <img src={product.imageUrl} alt={product.title} />

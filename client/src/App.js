@@ -78,10 +78,14 @@ const AppRoutes = () => {
         <Route path="/gallery/:id" render={(props) => <Details {...props}/>}></Route>
         <Route path="/update/:id" render={(props) => <Update {...props}/>}></Route>
         <AuthenticatedRoute exact path="/dashboard">
-          <Dashboard />
+          <AdminWrapper>
+            <Dashboard />
+          </AdminWrapper>
         </AuthenticatedRoute>
-        <Route path="/inventory">  
+        <Route path="/inventory">
+          <AdminWrapper>
             <Inventory />
+          </AdminWrapper>  
         </Route>
         <AdminRoute path="/users">
           <Users />

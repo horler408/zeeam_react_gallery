@@ -1,7 +1,9 @@
 import React, { useContext } from 'react';
-import classNames from 'classnames';
+// import classNames from 'classnames';
+import logo from "./../assets/logo.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
+  faHome,
   faChartLine,
   faAddressCard,
   faChartPie,
@@ -12,6 +14,12 @@ import { Link, useLocation } from 'react-router-dom';
 import { AuthContext } from './../context/AuthContext'
 
 const navItems = [
+  {
+    label: 'Home',
+    path: '',
+    icon: faHome,
+    allowedRoles: ['user', 'admin']
+  },
   {
     label: 'Dashboard',
     path: 'dashboard',
@@ -34,7 +42,7 @@ const navItems = [
     label: 'Settings',
     path: 'settings',
     icon: faCogs,
-    allowedRoles: ['user', 'admin']
+    allowedRoles: ['admin']
   },
   {
     label: 'Users',
@@ -45,18 +53,17 @@ const navItems = [
 ];
 
 const NavItem = ({ navItem }) => {
-  const location = useLocation();
-  const isCurrentRoute =
-    location.pathname === `/${navItem.path}`;
-  const classes = classNames({
-    'px-2 sm:px-6 justify-center sm:justify-start py-3 rounded-full flex': true,
-    'text-gray-600 hover:text-blue-500 transform hover:translate-x-1 transition ease-in-out duration-100': !isCurrentRoute,
-    'bg-gradient text-gray-100 shadow-lg': isCurrentRoute
-  });
+  // const location = useLocation();
+  // const isCurrentRoute = location.pathname === `/${navItem.path}`;
+  // const classes = classNames({
+  //   'px-2 sm:px-6 justify-center sm:justify-start py-3 rounded-full flex': true,
+  //   'text-gray-600 hover:text-blue-500 transform hover:translate-x-1 transition ease-in-out duration-100': !isCurrentRoute,
+  //   'bg-gradient text-gray-100 shadow-lg': isCurrentRoute
+  // });
   return (
-    <Link to={navItem.path} className={classes}>
-      <div className="flex items-center">
-        <div className="mr-0 sm:mr-4">
+    <Link to={navItem.path} className="anchor">
+      <div className="sidebar-items">
+        <div className="sidebar-icons">
           <FontAwesomeIcon icon={navItem.icon} />
         </div>
         <span className="hidden sm:block">
@@ -75,11 +82,11 @@ const Sidebar = () => {
   const authContext = useContext(AuthContext)
   const { role } = authContext.authState.userInfo
   return (
-    <section className="h-screen">
-      <div className="w-16 sm:w-24 m-auto">
-        {/* Logo Image */}
+    <section className="sidebar-container">
+      <div className="sidebar-logo">
+        <img src={logo} className="sidebar-logo" alt="Brand Logo" width="70" height="70" />
       </div>
-      <div className="mt-20">
+      <div className="sidebar-items-container">
         {navItems.map((navItem, i) => (
           <>
             {authContext.isAdmin() &&

@@ -14,27 +14,27 @@ export default function Footer() {
                 <div className="contacts">
                 <h2>Contact Us</h2>
                 <p>+234-706-642-8889</p>
-                <p><a href="mailto:horler.web@gmail.com">horler.web@gmail.com</a></p>
+                <p><a href="mailto:horler.web@gmail.com">zeeam1990@gmail.com</a></p>
                 </div>
             </div>
             <div className="footer__bottom--right">
                 <div className="footer__bottom--items">
                 <h4 className="footer__bottom--head">Features</h4>
-                <p>Monitoring</p>
-                <p>Broadcasts</p>
-                <p>Analysis</p>
+                <p>Products</p>
+                <p>Services</p>
+                <p>Customer Care</p>
                 </div>
                 <div className="footer__bottom--items">
                 <h4 className="footer__bottom--head">Social</h4>
-                <p>Bing</p>
-                <p>Developers</p>
-                <p>Bloggers</p>
+                <p>Facebook</p>
+                <p>Whatsapp</p>
+                <p>Twitter</p>
                 </div>
                 <div className="footer__bottom--items">
                 <h4 className="footer__bottom--head">Company</h4>
                 <p>About</p>
                 <p>Our Mission</p>
-                <p>Owners</p>
+                <p>Our Vision</p>
                 <p>Content</p>
                 </div>
                 <div className="footer__bottom--items">

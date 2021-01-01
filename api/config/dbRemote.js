@@ -6,8 +6,8 @@ const mongoose = require("mongoose");
 const dbConnect = () => {
   mongoose
     .connect(
-      "mongodb+srv://arseling:UhXoJsWXNbNNjgGk@cluster0.nnle7.mongodb.net/<dbname>?retryWrites=true&w=majority",
-      { useNewUrlParser: true }
+      "mongodb+srv://arseling:UhXoJsWXNbNNjgGk@cluster0.nnle7.mongodb.net/zeeam-shop?retryWrites=true&w=majority",
+      { useNewUrlParser: true, useUnifiedTopology: true }
     )
     .then(() => {
       console.log("Successfully connected to MongoDB Atlas!");

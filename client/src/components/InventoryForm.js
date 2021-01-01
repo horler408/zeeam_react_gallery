@@ -2,7 +2,6 @@ import React from 'react';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import Label from './../components/common/Label';
-import Hyperlink from './../components/common/Hyperlink';
 import FormInput from './common/FormInput';
 import FormSelect from './common/FormSelect'
 import GradientButton from './common/GradientButton';
@@ -106,9 +105,6 @@ const InventoryItemForm = ({ onSubmit }) => {
               type="submit" 
               text="Submit" 
             />
-            <p className="home_return">Return to{' '}
-              <Hyperlink to="/" text="Home" />
-            </p>
           </div>
         </Form>
       )}

@@ -45,6 +45,7 @@ exports.createProduct = (req, res) => {
 };
 
 exports.getAllProduct = (req, res, next) => {
+  //res.json(res.paginatedResults)
   Product.find()
   .select("id title price description imageUrl")
     .then(products => {

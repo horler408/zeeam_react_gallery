@@ -4,7 +4,8 @@ const router = express.Router();
 const productCrtl = require("../controllers/product");
 const auth = require("../middleware/auth");
 const multer = require("../middleware/multer-config");
-//const paginatedResults = require("./../middleware/pagination");
+const Product = require("../models/product");
+const paginatedResults = require("./../middleware/pagination");
 
 
 router.get("/", productCrtl.getAllProduct);
