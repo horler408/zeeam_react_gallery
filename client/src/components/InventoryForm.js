@@ -3,11 +3,11 @@ import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import Label from './../components/common/Label';
 import FormInput from './common/FormInput';
-import FormSelect from './common/FormSelect'
+// import FormSelect from './common/FormSelect'
 import GradientButton from './common/GradientButton';
 
 const InventoryItemSchema = Yup.object().shape({
-  name: Yup.string().required('Product Name is required'),
+  title: Yup.string().required('Product Name is required'),
   description: Yup.string().required('Description is required'),
   price: Yup.string().required('Unit price is required'),
   category: Yup.string().required('Category selection is required'),
@@ -19,7 +19,7 @@ const InventoryItemForm = ({ onSubmit }) => {
   return (
     <Formik
       initialValues={{
-        name: '',
+        title: '',
         description: '',
         price: '',
         category: '',
@@ -36,12 +36,12 @@ const InventoryItemForm = ({ onSubmit }) => {
           <div className="">
             <div className="form_div">
               <div className="label">
-                <Label text="Item Name" />
+                <Label text="Title" />
               </div>
               <FormInput
                 styleName=""
-                ariaLabel="Name"
-                name="name"
+                ariaLabel="Title"
+                name="title"
                 type="text"
                 placeholder="Item Name"
               />
@@ -72,8 +72,21 @@ const InventoryItemForm = ({ onSubmit }) => {
                 placeholder="Unit Price"
               />
             </div>
-            
+
             <div className="form_div">
+              <div className="label">
+                <Label text="Category" />
+              </div>
+              <FormInput
+                styleName=""
+                ariaLabel="Category"
+                name="category"
+                type="text"
+                placeholder="e.g Fabrics, shoes, bags, etc"
+              />
+            </div>
+            
+            {/* <div className="form_div">
               <div className="label">
                 <Label text="Category" />
               </div>
@@ -84,8 +97,19 @@ const InventoryItemForm = ({ onSubmit }) => {
                 type="select"
                 placeholder="Category"
               />
+            </div> */}
+            <div className="featured">
+              <div className="check-label">
+                <Label text="Featured" />
+              </div>
+              <FormInput
+                styleName="check-btn"
+                ariaLabel="Featured"
+                name="featured"
+                type="checkbox"
+              />
             </div>
-
+            
             <div className="form_div">
               <div className="label">
                 <Label text="Image Upload" />

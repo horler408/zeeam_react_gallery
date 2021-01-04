@@ -88,14 +88,14 @@ const Sidebar = () => {
       </div>
       <div className="sidebar-items-container">
         {navItems.map((navItem, i) => (
-          <>
+          <div key={i}>
             {authContext.isAdmin() &&
             navItem.allowedRoles.includes(role) && (
-              <NavItemContainer key={i}>
+              <NavItemContainer>
                 <NavItem navItem={navItem} />
               </NavItemContainer>
             )}
-          </>
+          </div>
         ))}
       </div>
     </section>

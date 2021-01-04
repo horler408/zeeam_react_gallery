@@ -8,7 +8,7 @@ const Product = require("../models/product");
 const paginatedResults = require("./../middleware/pagination");
 
 
-router.get("/", productCrtl.getAllProduct);
+router.get("/", paginatedResults(Product), productCrtl.getAllProduct);
 
 router.post("/", multer, productCrtl.createProduct);
 

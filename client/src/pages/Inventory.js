@@ -4,10 +4,10 @@ import React, {
     useState
   } from 'react';
   
+import { publicFetch } from './../util/fetch';
 import { FetchContext } from '../context/FetchContext';
 import InventoryItemForm from './../components/InventoryForm';
 import DangerButton from './../components/common/DangerButton';
-// import Hyperlink from './../components/common/Hyperlink';
 import FormError from './../components/FormError';
 import FormSuccess from './../components/FormSuccess';
 import Preloader from './../components/common/Preloader';
@@ -72,7 +72,7 @@ const Inventory = () => {
           'product'
         );
           console.log(data);
-          setInventory(data);
+          setInventory(data.results);
           setLoading(false)
         } catch (err) {
           console.log('the err', err);
@@ -84,21 +84,24 @@ const Inventory = () => {
   }, [fetchContext]);
   
   const onSubmit = async (values, resetForm) => {
-    try {
-      const { data } = await fetchContext.authAxios.post(
-          'product', values
-        );
-        console.log(data);
-        setInventory([...inventory, data.inventoryItem]);
-        resetForm();
-        setSuccessMessage(data.message);
-        setErrorMessage(null);
-        setFormDisplay("none");
-      } catch (err) {
-        const { data } = err.response;
-        setSuccessMessage(null);
-        setErrorMessage(data.message);
-    }
+    const { data } = await publicFetch.post('product', values)
+    resetForm();
+    console.log(data);
+    // try {
+    //   const { data } = await fetchContext.authAxios.post(
+    //       'product', values
+    //     );
+    //     console.log(data);
+    //     setInventory([...product, data.inventoryItem]);
+    //     resetForm();
+    //     setSuccessMessage(data.message);
+    //     setErrorMessage(null);
+    //     setFormDisplay("none");
+    //   } catch (err) {
+    //     const { data } = err.response;
+    //     setSuccessMessage(null);
+    //     setErrorMessage(data.message);
+    // }
   };
   
   const onDelete = async item => {

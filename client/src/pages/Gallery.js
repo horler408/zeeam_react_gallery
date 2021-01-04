@@ -16,15 +16,17 @@ export default function Gallery() {
     
     const [products, setProducts] = useState([])
     const [loading, setLoading] = useState(false)
+    const[category, setCategory] = useState("");
+    const[page, setPage] = useState(1);
+
+    const endpoint = `product?page=${page}&limit=4&category=${category}`
 
     useEffect(() => {
         const getProducts = async () => {
           try {
             setLoading(true)
-            const { data } = await publicFetch.get(
-              'product'
-            );
-            setProducts(data);
+            const { data } = await publicFetch.get(endpoint);
+            setProducts(data.results);
             setLoading(false)
           } catch (err) {
             console.log(err);
@@ -32,30 +34,42 @@ export default function Gallery() {
         };
     
         getProducts();
-      }, []);
+      }, [endpoint]);
 
     /*useEffect(() => {
         const getResource = async () => {
-            const response = await Axios.get(`http://localhost:3001/api/product`);
+            const response = await Axios.get(endpoint);
             const result = await response.data
             console.log(result);
             setProducts(result)
         }
         getResource()
-    }, [])*/
+    }, [endpoint])*/
 
     return (
       <>
         <div className="gallery_container">
+          <div style={{display: "flex"}}>
             <div className="select">
-                <select name="category" id="select">
+                <select name="category" id="select" onChange={(e) => setCategory(e.target.value)}>
                 <option value="">Select by category</option>
-                <option value="">Fabrics</option>
-                <option value="">Shoes</option>
-                <option value="">Bags</option>
-                <option value="">Ornaments</option>
+                <option value="fabrics">Fabrics</option>
+                <option value="clothes">Clothes</option>
+                <option value="shoes">Shoes</option>
+                <option value="bags">Bags</option>
+                <option value="ornaments">Ornaments</option>
                 </select>
             </div>
+              <div>
+              {page > 1 ? (
+                <button className="nav-btn" onClick={() => setPage(page - 1)}>Prev Page</button>
+              ) : ""}
+              {page !== (page.length - 1) ? (
+                <button className="nav-btn" onClick={() => setPage(page + 1)}>Next Page</button>
+              ) : ""}
+              </div>
+              <div className="gallery-page">Page {page}</div>
+          </div>
             <div className="gallery_info"></div>
                
             <div className="gallery_contents">
@@ -67,7 +81,7 @@ export default function Gallery() {
                       <div className="price">{product.price}</div>
                       <p className="item_order">
                         <Link to={`/gallery/${product._id}`}>
-                          {product.description}
+                          click to order
                         </Link>
                       </p>
                     </div>   

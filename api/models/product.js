@@ -3,10 +3,10 @@ const mongoose = require("mongoose");
 const productSchema = mongoose.Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
-  imageUrl: { type: String, default:
-    'ht&crop=entropy&cs=tinysrgb&w=800&h=600&fit=crop&ixid=eyJhcHBfaWQiOjF9'},
+  imageUrl: { type: String},
   price: { type: Number, required: true },
-  category: { type: String, required: true}
+  category: { type: String, required: true},
+  featured: {type: Boolean, default: false}
 });
 
 module.exports = mongoose.model("Product", productSchema);

@@ -574,6 +574,24 @@ button:focus {
     font-size: 20px;
   }
 
+  .gallery-page {
+    margin: 35px;
+    font-size: 18px;
+  }
+
+  .nav-btn {
+    height: 30px;
+    padding: 5px 15px;
+    outline: none;
+    background-color: hsl(194, 74%, 56%);
+    color: #fff;
+    font-size: 18px;
+    border: none;
+    margin: 30px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
   /* Inventory */
   .inventory_container {
     position: relative;
@@ -629,6 +647,17 @@ button:focus {
     font-size: 18px;
     font-weight: bold;
     text-align: center;
+  }
+
+  .featured {
+    display: flex;
+  }
+  .check-label {
+    display: inline-block !important;
+  }
+  .check-btn {
+    display: inline-block;
+    width: 20px;
   }
 
   /* Form */
@@ -694,6 +723,10 @@ button:focus {
   }
   .detail_title {
     top: 92%;
+  }
+  .check-btn {
+    display: inline-block;
+    width: 20px;
   }
 
   /* Header */

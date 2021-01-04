@@ -3,7 +3,7 @@ const fs = require("fs");
 
 
 exports.createProduct = (req, res) => {
-  const { title, description, price, category} = req.body
+  const { title, description, price, category, featured} = req.body
   const url = req.protocol + "://" + req.get("host");
   let errors = [];
 
@@ -29,6 +29,9 @@ exports.createProduct = (req, res) => {
       price,
       category
     });
+    if(featured === 'checked') {
+      product.featured = true;
+    }
     product
       .save()
       .then(() => {
@@ -45,17 +48,17 @@ exports.createProduct = (req, res) => {
 };
 
 exports.getAllProduct = (req, res, next) => {
-  //res.json(res.paginatedResults)
-  Product.find()
-  .select("id title price description imageUrl")
-    .then(products => {
-      res.status(200).json(products);
-    })
-    .catch(err => {
-      res.status(400).json({
-        error: err
-      });
-    });
+  res.json(res.paginatedResults)
+  // Product.find()
+  // .select("id title price description imageUrl")
+  //   .then(products => {
+  //     res.status(200).json(products);
+  //   })
+  //   .catch(err => {
+  //     res.status(400).json({
+  //       error: err
+  //     });
+  //   });
 };
 
 exports.getOneProduct = (req, res, next) => {
