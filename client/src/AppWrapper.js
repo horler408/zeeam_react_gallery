@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import GradientBar from './components/GradientBar';
 import Navbar from './components/NavBar';
 import Footer from './components/Footer';

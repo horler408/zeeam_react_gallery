@@ -30,31 +30,31 @@ const Details = ({ match, history }) => {
         getProduct();
     }, [id])
 
-    const handleDelete = async (item) => {
-        try {
-            setRedirectOnDelete(false)
-          if (
-            window.confirm(
-              'Are you sure you want to delete this item?'
-            )
-          ) {
-            const { data } = await publicFetch.delete(
-              `product/${item._id}`
-            );
+    // const handleDelete = async (item) => {
+    //     try {
+    //         setRedirectOnDelete(false)
+    //       if (
+    //         window.confirm(
+    //           'Are you sure you want to delete this item?'
+    //         )
+    //       ) {
+    //         const { data } = await publicFetch.delete(
+    //           `product/${item._id}`
+    //         );
 
-            setSuccessMessage(data.message);
-            setErrorMessage(null);
-            // Redirect to Gallery Page
-            setTimeout(() => {
-                setRedirectOnDelete(true)
-            }, 1000)
-          }
-        } catch (err) {
-          const { data } = err.response;
-          setSuccessMessage(null)
-          setErrorMessage(data.message);
-        }
-      }
+    //         setSuccessMessage(data.message);
+    //         setErrorMessage(null);
+    //         // Redirect to Gallery Page
+    //         setTimeout(() => {
+    //             setRedirectOnDelete(true)
+    //         }, 1000)
+    //       }
+    //     } catch (err) {
+    //       const { data } = err.response;
+    //       setSuccessMessage(null)
+    //       setErrorMessage(data.message);
+    //     }
+    //   }
 
     return (
         <>
@@ -81,9 +81,8 @@ const Details = ({ match, history }) => {
                             </div>
                             <div>
                                 <Link to={`/update/${id}`}>
-                                    <button className="update_btn">Update</button>
-                                </Link>
-                                <button onClick={() => handleDelete(product)} className="delete_btn">Delete</button>     
+                                    <button className="update_btn">Edit Product</button>
+                                </Link>     
                             </div>
                         </div>
                         <button className="order_btn"

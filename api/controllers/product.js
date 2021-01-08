@@ -3,7 +3,7 @@ const fs = require("fs");
 
 
 exports.createProduct = (req, res) => {
-  const { title, description, price, category, featured} = req.body
+  const { title, description, price, category, featured, imageUrl} = req.body
   const url = req.protocol + "://" + req.get("host");
   let errors = [];
 
@@ -25,18 +25,20 @@ exports.createProduct = (req, res) => {
     const product = new Product({
       title,
       description,
-      imageUrl: url + "/images/" + req.file.filename,
+      //imageUrl: url + "/images/" + req.file.filename,
       price,
-      category
+      category,
+      imageUrl
     });
     if(featured === 'checked') {
       product.featured = true;
     }
     product
       .save()
-      .then(() => {
+      .then((inventoryItems) => {
         res.status(200).json({
-          message: "Product saved successfully!"
+          message: "Product saved successfully!",
+          inventoryItems
         });
       })
       .catch(err => {
@@ -117,12 +119,13 @@ exports.deleteProduct = (req, res, next) => {
       Product.deleteOne({ _id: req.params.id })
         .then(() => {
           res.status(200).json({
-            message: "Deleted Successfully!"
+            message: "Deleted Successfully!",
+            product
           });
         })
         .catch(error => {
           res.status(404).json({
-            error: error
+            message: "There was a problem deleting the product!" +error
           });
         });
     });
@@ -130,9 +133,10 @@ exports.deleteProduct = (req, res, next) => {
 };
 exports.deleteItem = (req, res) => {
   Product.deleteOne({ _id: req.params.id })
-  .then(() => {
+  .then((deletedItem) => {
     res.status(200).json({
-      message: "Deleted Successfully!"
+      message: "Deleted Successfully!",
+      deletedItem
     });
    })
   .catch(error => {

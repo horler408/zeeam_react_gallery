@@ -19,7 +19,7 @@ export default function Gallery() {
     const[category, setCategory] = useState("");
     const[page, setPage] = useState(1);
 
-    const endpoint = `product?page=${page}&limit=4&category=${category}`
+    const endpoint = `product?page=${page}&limit=8&category=${category}`
 
     useEffect(() => {
         const getProducts = async () => {
@@ -35,16 +35,6 @@ export default function Gallery() {
     
         getProducts();
       }, [endpoint]);
-
-    /*useEffect(() => {
-        const getResource = async () => {
-            const response = await Axios.get(endpoint);
-            const result = await response.data
-            console.log(result);
-            setProducts(result)
-        }
-        getResource()
-    }, [endpoint])*/
 
     return (
       <>

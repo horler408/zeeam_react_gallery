@@ -4,7 +4,7 @@ import React, {
     useState
   } from 'react';
   
-import { publicFetch } from './../util/fetch';
+import Axios from 'axios';
 import { FetchContext } from '../context/FetchContext';
 import InventoryItemForm from './../components/InventoryForm';
 import DangerButton from './../components/common/DangerButton';
@@ -50,7 +50,7 @@ const NewInventoryItem = ({ onSubmit }) => {
   return (
       <section className="inventory_form">
         <p className="form_header">New Inventory Item</p>
-        <InventoryItemForm onSubmit={onSubmit} />
+        <InventoryItemForm handleSubmit={onSubmit} />
       </section>
   );
 };
@@ -71,7 +71,7 @@ const Inventory = () => {
         const { data } = await fetchContext.authAxios.get(
           'product'
         );
-          console.log(data);
+          //console.log(data);
           setInventory(data.results);
           setLoading(false)
         } catch (err) {
@@ -84,15 +84,15 @@ const Inventory = () => {
   }, [fetchContext]);
   
   const onSubmit = async (values, resetForm) => {
-    const { data } = await publicFetch.post('product', values)
+    const { data } = await Axios.post('api/product', values)
     resetForm();
-    console.log(data);
+    console.log(data.message);
     // try {
     //   const { data } = await fetchContext.authAxios.post(
     //       'product', values
     //     );
     //     console.log(data);
-    //     setInventory([...product, data.inventoryItem]);
+    //     setInventory([...product, data.inventoryItems]);
     //     resetForm();
     //     setSuccessMessage(data.message);
     //     setErrorMessage(null);
@@ -106,21 +106,15 @@ const Inventory = () => {
   
   const onDelete = async item => {
     try {
-        if (
-          window.confirm(
-            'Are you sure you want to delete this item?'
-          )
-        ) {
-          const {
-            data
-          } = await fetchContext.authAxios.delete(
-            `inventory/${item._id}`
+        if (window.confirm('Are you sure you want to delete this item?')) {
+          const { data } = await fetchContext.authAxios.delete(
+            `product/${item._id}`
           );
-          setInventory(
-            inventory.filter(
-              item => item._id !== data.deletedItem._id
-            )
-          );
+          const filteredInventory = inventory.filter(item => {
+            return item._id !== data.product._id
+          })
+          setInventory(filteredInventory);
+          setSuccessMessage(data.message);
         }
     } catch (err) {
         const { data } = err.response;
