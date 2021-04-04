@@ -4,7 +4,7 @@ import React, {
     useState
   } from 'react';
   
-import Axios from 'axios';
+//import Axios from 'axios';
 import { FetchContext } from '../context/FetchContext';
 import InventoryItemForm from './../components/InventoryForm';
 import DangerButton from './../components/common/DangerButton';
@@ -84,24 +84,24 @@ const Inventory = () => {
   }, [fetchContext]);
   
   const onSubmit = async (values, resetForm) => {
-    const { data } = await Axios.post('api/product', values)
-    resetForm();
-    console.log(data.message);
-    // try {
-    //   const { data } = await fetchContext.authAxios.post(
-    //       'product', values
-    //     );
-    //     console.log(data);
-    //     setInventory([...product, data.inventoryItems]);
-    //     resetForm();
-    //     setSuccessMessage(data.message);
-    //     setErrorMessage(null);
-    //     setFormDisplay("none");
-    //   } catch (err) {
-    //     const { data } = err.response;
-    //     setSuccessMessage(null);
-    //     setErrorMessage(data.message);
-    // }
+    // const { data } = await Axios.post('api/product', values)
+    // resetForm();
+    // console.log(data.message);
+    try {
+      const { data } = await fetchContext.authAxios.post(
+          'product', values
+        );
+        console.log(data);
+        setInventory([...inventory, data.inventoryItems]);
+        resetForm();
+        setSuccessMessage(data.message);
+        setErrorMessage(null);
+        setFormDisplay("none");
+      } catch (err) {
+        const { data } = err.response;
+        setSuccessMessage(null);
+        setErrorMessage(data.message);
+    }
   };
   
   const onDelete = async item => {
